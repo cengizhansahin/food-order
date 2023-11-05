@@ -1,13 +1,18 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function Navbar() {
+  const cartState = useSelector((state) => state.cartReducer);
+  const { cartItems } = cartState;
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <Link className="navbar-brand" to="#">
             Navbar
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -22,26 +27,26 @@ function Navbar() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link " aria-current="page" href="#">
+                <Link className="nav-link " aria-current="page" to="/">
                   Home
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Features
-                </a>
+                <Link className="nav-link" to="/">
+                  Ürünler
+                </Link>
               </li>
             </ul>
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <Link className="nav-link" to="/sepet">
                   Sepet
                   <i class="fa-solid fa-cart-shopping fa-beat"></i>
                   <span className="position-absolute top-10 start-80 translate-middle badge rounded-pill bg-danger" />
                   <span className="position-absolute top-10 start-80 translate-middle badge rounded-pill bg-danger">
-                    1
+                    {cartItems.length}
                   </span>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
