@@ -24,7 +24,7 @@ function MenuList({ menu }) {
 
   return (
     <div>
-      <div className="card m-auto my-3" style={{ width: "18rem" }}>
+      <div className="card m-auto my-3">
         <img
           src={menu.img}
           alt=""
@@ -58,10 +58,16 @@ function MenuList({ menu }) {
                 min={1}
                 max={10}
                 className="form-control mt-2"
-                value={miktar}
+                value={miktar > 10 ? 10 : miktar < 0 ? 1 : miktar}
                 onChange={adetHandler}
               />
             </div>
+            <h5 className="text-danger">
+              Fiyat:
+              {menu.fiyat[0][ozellik] *
+                (miktar > 10 ? 10 : miktar < 1 ? 1 : miktar)}{" "}
+              ₺
+            </h5>
           </div>
 
           <button className="btn btn-danger w-75 mt-3" onClick={addToCart}>
