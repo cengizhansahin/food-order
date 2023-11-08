@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCartAction, deleteFromCartAction } from "../actions/cartActions";
+import SepetBos from "../components/SepetBos";
 
 function CartPage() {
   const cartState = useSelector((state) => state.cartReducer);
@@ -18,25 +19,28 @@ function CartPage() {
   return (
     <div>
       <div className="container">
-        <div className="text-center">
-          <h2 className="display-2 text-warning">Sepetim</h2>
-          {cartItems.length > 0 ? (
-            cartItems.map((urun) => (
+        {cartItems.length < 1 ? (
+          <SepetBos />
+        ) : (
+          <div className="text-center">
+            <h2 className="display-2 text-warning">Sepetim</h2>
+
+            {cartItems.map((urun) => (
               <div className="row border border-3 border-warning shadow-lg p-3 mb-5">
-                <div className="col-md-4">
+                <div className="col-md-2">
                   <img src={urun.img} alt="" style={{ width: "200px" }} />
                 </div>
-                <div className="col-md-4">
+                <div className="col-md-8">
                   <h3>
-                    {urun.ad} |{""}
+                    {urun.ad} |{" "}
                     <span className="text-danger">
                       {urun.ozellik.slice(0, 1).toUpperCase()}
                       {urun.ozellik.slice(1, urun.ozellik[urun.ozellik.length])}
                     </span>
                   </h3>
-                  <p>{urun.desc}</p>
+                  <p className="w-75 mx-auto">{urun.desc} </p>
                 </div>
-                <div className="col-md-4">
+                <div className="col-md-2">
                   <h5 className="text-dark">Ürün Adedi</h5>
                   <div className="d-flex justify-content-center align-items-center w-50 mx-auto">
                     <i
@@ -74,14 +78,12 @@ function CartPage() {
                   </p>
                 </div>
               </div>
-            ))
-          ) : (
-            <div className="alert alert-danger" role="alert">
-              SEPETE ÜRÜN YOK 😭
-            </div>
-          )}
-        </div>
-        <h5 className="text-danger">Toplam fiyat: {toplamFiyat}</h5>
+            ))}
+            <h3 className="text-center text-danger">
+              Toplam Fiyat: {toplamFiyat} ₺
+            </h3>
+          </div>
+        )}
       </div>
     </div>
   );
