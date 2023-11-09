@@ -1,21 +1,18 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { loginUserAction } from '../actions/usersAction';
-import { useNavigate } from "react-router-dom";
-
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { loginUserAction } from "../actions/userAction";
 
 function Login() {
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleLogin = (e) => {
     e.preventDefault();
-    dispatch(loginUserAction(mail, password))
-  }
+    dispatch(loginUserAction(mail, password));
+  };
   return (
     <div className="vh-100 d-flex align-items-center justify-content-center">
-      <div className="shadow p-3 rounded bg-white w-25">
+      <div className="shadow p-3 rounded bg-dark w-25">
         <form onSubmit={handleLogin}>
           <div className="form-group my-3">
             <label htmlFor="mail">Mailinizi Giriniz</label>
@@ -45,7 +42,8 @@ function Login() {
           </button>
         </form>
       </div>
-    </div>)
+    </div>
+  );
 }
 
-export default Login
+export default Login;

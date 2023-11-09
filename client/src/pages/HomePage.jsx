@@ -1,17 +1,16 @@
 import React, { useEffect } from "react";
-// import { menuler } from "../yemekData";
 import MenuList from "../components/MenuList";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllBurgers } from "../actions/burgerAction";
 import Dondurucu from "../components/Dondurucu";
 function HomePage() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const burgerState = useSelector((state) => state.getAllBurgersReducer);
   const { burgers, loading } = burgerState;
   console.log(burgers);
   useEffect(() => {
-    dispatch(getAllBurgers())
-  }, [])
+    dispatch(getAllBurgers());
+  }, []);
 
   return (
     <div>
@@ -21,7 +20,7 @@ function HomePage() {
             <Dondurucu />
           ) : (
             burgers.map((menu) => (
-              <div className="col-md-3">
+              <div className="col-md-3" key={menu._id}>
                 <MenuList menu={menu} />
               </div>
             ))
