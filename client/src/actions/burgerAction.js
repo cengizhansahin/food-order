@@ -15,7 +15,7 @@ export const getAllBurgers = () => async (dispatch) => {
     });
   } catch (error) {
     dispatch({
-      type: "GET_BURGERS_SUCCESS",
+      type: "GET_BURGERS_FAILED",
       payload: error,
     });
   }
