@@ -1,16 +1,42 @@
-export const userReducer = (state = { users: null }, action) => {
+export const registerUserReducer = (state = {}, action) => {
   switch (action.type) {
-    case "REQUEST":
+    case "USER_REGISTER_REQUEST":
       return {
-        ...state,
+        loading: true,
       };
-    case "SUCCESS":
+    case "USER_REGISTER_SUCCESS":
       return {
-        users: action.payload,
+        loading: false,
+        success: true,
+        registeredUser: action.payload,
       };
+    case "USER_REGISTER_FAILED":
+      return {
+        loading: false,
+        success: false,
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
 
-    case "FAILED":
+export const loginUserReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "USER_LOGIN_REQUEST":
       return {
+        loading: true,
+      };
+    case "USER_LOGIN_SUCCESS":
+      return {
+        loading: false,
+        success: true,
+        currentUser: action.payload,
+      };
+    case "USER_LOGIN_FAILED":
+      return {
+        loading: false,
+        success: false,
         error: action.payload,
       };
 

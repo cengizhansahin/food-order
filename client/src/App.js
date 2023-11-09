@@ -3,18 +3,20 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import CartPage from "./pages/CartPage";
+import Register from "./components/Register";
 import Login from "./components/Login";
-import { useSelector } from "react-redux";
 
 function App() {
-  const usersState = useSelector((state) => state.userReducer);
-  const { users } = usersState;
+  // const usersState = useSelector((state) => state.userReducer);
+  // const { users } = usersState;
   return (
     <div className="App">
       <Navbar />
       <Routes>
-        <Route path="/" element={users ? <HomePage /> : <Login />} />
-        <Route path="/sepet" element={users ? <CartPage /> : <Login />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/sepet" element={<CartPage />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </div>
   );
