@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCartAction, deleteFromCartAction } from "../actions/cartActions";
 import SepetBos from "../components/SepetBos";
+import Checkout from "../components/Checkout";
 
 function CartPage() {
   const cartState = useSelector((state) => state.cartReducer);
@@ -82,6 +83,7 @@ function CartPage() {
             <h3 className="text-center text-danger">
               Toplam Fiyat: {toplamFiyat} ₺
             </h3>
+            <Checkout toplamFiyat={toplamFiyat} />
           </div>
         )}
       </div>

@@ -34,7 +34,7 @@ router.post("/login", async (req, res) => {
     } else {
       res
         .status(400)
-        .json({ message: "Girilen bilgilerde hata bulunmamaktadır.." });
+        .json({ message: "Girilen bilgilerde kullanıcı bulunmamaktadır.." });
     }
   } catch (error) {
     res.send(error);

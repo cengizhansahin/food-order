@@ -29,7 +29,7 @@ function HomePage() {
             <Dondurucu />
           ) : (
             burgers.map((menu) => (
-              <div className="col-md-3" key={menu._id}>
+              <div key={menu._id} className="col-md-3">
                 <MenuList menu={menu} />
               </div>
             ))
