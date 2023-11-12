@@ -40,4 +40,27 @@ router.post("/login", async (req, res) => {
     res.send(error);
   }
 });
+
+//getAllUser
+router.get("/getAllUsers", async (req, res) => {
+  try {
+    const users = await userModel.find();
+    res.json(users);
+  } catch (error) {
+    res.status(400).json({ message: "hata", error });
+  }
+});
+
+//kullanıcı silme
+router.post("/deleteUser", async (req, res) => {
+  const userid = req.body.userid;
+  //const {userid} = req.body;
+
+  try {
+    await userModel.findOneAndDelete({ _id: userid });
+    res.send("Kullanıcı silme başarılı");
+  } catch (error) {
+    res.status(400).json({ message: error });
+  }
+});
 module.exports = router;

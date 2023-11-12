@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 
 //Register
 export const registerUserAction = (user) => async (dispatch) => {
@@ -32,5 +33,35 @@ export const loginUserAction = (user) => async (dispatch) => {
 
 export const logoutUserAction = () => {
   localStorage.removeItem("currentUser");
-  window.location.href = "/login";
+  // window.location.href = "/login";
+};
+
+export const getAllUsersAction = () => async (dispatch) => {
+  dispatch({ type: "GET_ALL_USERS_REQUEST" });
+  try {
+    const response = await axios.get(
+      "http://localhost:4000/api/users/getAllUsers"
+    );
+    dispatch({ type: "GET_ALL_USERS_SUCCESS", payload: response.data });
+  } catch (error) {
+    dispatch({ type: "GET_ALL_USERS_FAILED", payload: error });
+  }
+};
+
+export const deleteUserAction = (userid) => async (dispatch) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:4000/api/users/deleteUser",
+      { userid }
+    );
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Silme İşlemi Başarılı",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };

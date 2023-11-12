@@ -12,7 +12,7 @@ function Login() {
   const { error, currentUser, success, loading } = userState;
   const navigate = useNavigate();
   const girisHandler = () => {
-    if (mail == "" || password == "") {
+    if (mail === "" || password === "") {
       Swal.fire("Eksik alanları doldurunuz");
     } else {
       const kullanici = {

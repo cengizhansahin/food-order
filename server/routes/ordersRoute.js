@@ -57,12 +57,13 @@ router.post("/checkoutOrder", async (req, res) => {
 
 router.post("/getOrdersByUser", async (req, res) => {
   const { userid } = req.body;
-
+  console.log("User ID: ", userid);
   try {
-    const orders = await orderModel.find({ userid: userid }.sort({ _id: -1 }));
+    const orders = await orderModel.find({ userid: userid });
     res.send(orders);
+    console.log(orders);
   } catch (error) {
-    res.status(400).json({ message: "Siparişlere Erişilemiyor", error });
+    res.status(400).json({ message: error });
   }
 });
 
