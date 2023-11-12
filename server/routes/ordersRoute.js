@@ -7,7 +7,6 @@ const stripe = require("stripe")(
   "sk_test_51OBIl9BuNN2GghdENruscjbtUNeRy3QpkAZJmbKBOtUXDUpaXoGTMZwUCs2nYAQmHslHGqaCy1JjNCbBVtdY4DwJ00pYyhjdW5"
 );
 const { v4: uuid } = require("uuid");
-const { route } = require("./burgersRoute");
 const app = express();
 app.use(cors());
 router.post("/checkoutOrder", async (req, res) => {
