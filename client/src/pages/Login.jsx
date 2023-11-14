@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUserAction } from "../actions/userAction";
-import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function Login() {
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
+
   const dispatch = useDispatch();
-  const userState = useSelector((state) => state.loginUserReducer);
-  const { error, currentUser, success, loading } = userState;
+  const falanState = useSelector((state) => state.loginUserReducer);
+  const { error, currentUser, success, loading } = falanState;
   const navigate = useNavigate();
   const girisHandler = () => {
-    if (mail === "" || password === "") {
+    if (mail == "" || password == "") {
       Swal.fire("Eksik alanları doldurunuz");
     } else {
       const kullanici = {
@@ -20,7 +21,7 @@ function Login() {
         password: password,
       };
       dispatch(loginUserAction(kullanici));
-      if (!error) {
+      if (success == true) {
         Swal.fire({
           position: "center",
           icon: "success",
@@ -38,6 +39,7 @@ function Login() {
       }
     }
   };
+
   useEffect(() => {
     if (currentUser) {
       navigate("/");
@@ -45,35 +47,25 @@ function Login() {
   }, [currentUser]);
 
   return (
-    <div className="vh-100 d-flex align-items-center justify-content-center">
-      <div className="shadow p-3 rounded bg-dark w-25">
-        <div className="form-group my-3">
-          <label htmlFor="mail">Mailinizi Giriniz</label>
-          <input
-            type="text"
-            className="form-control"
-            id="mail"
-            aria-describedby="mailDescription"
-            placeholder="Lütfen Mailinizi Giriniz."
-            onChange={(e) => setMail(e.target.value)}
-          />
-        </div>
-        <div className="form-group my-3">
-          <label htmlFor="password">Parolanızı Giriniz</label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            placeholder="Lütfen Parolanızı Giriniz"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button
-          type="submit"
-          className="btn btn-primary"
-          onClick={girisHandler}
-        >
-          Login
+    <div style={{ marginTop: "100px" }}>
+      <div className="container bg-warning w-50" style={{ height: "250px" }}>
+        <h2 className="display-4">Kullanıcı Giriş Ekranı</h2>
+
+        <input
+          type="email"
+          placeholder="Email giriniz"
+          className="form-control "
+          onChange={(e) => setMail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Şifrenizi giriniz"
+          className="form-control my-3"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <button className="btn btn-danger w-50 m-auto" onClick={girisHandler}>
+          GİRİŞ YAP
         </button>
       </div>
     </div>

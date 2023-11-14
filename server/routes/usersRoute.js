@@ -5,6 +5,7 @@ const router = express.Router();
 //*Register endpointini yazalım.
 router.post("/register", async (req, res) => {
   const { name, mail, password } = req.body;
+
   const oldUser = await userModel.findOne({ mail: mail });
   if (oldUser) {
     res.status(400).json({ message: "Böyle bir kullanıcı bulunmaktadır." });
@@ -14,6 +15,7 @@ router.post("/register", async (req, res) => {
       mail: mail,
       password: password,
     });
+
     try {
       await newUser.save();
       res.send(newUser);
@@ -22,11 +24,11 @@ router.post("/register", async (req, res) => {
     }
   }
 });
-module.exports = router;
 
-//login endpoint
+//login endpointi
 router.post("/login", async (req, res) => {
   const { mail, password } = req.body;
+
   try {
     const user = await userModel.find({ mail: mail, password: password });
     if (user.length > 0) {
@@ -36,6 +38,10 @@ router.post("/login", async (req, res) => {
         .status(400)
         .json({ message: "Girilen bilgilerde kullanıcı bulunmamaktadır.." });
     }
+    // const user = await userModel.findOne({mail:mail, password:password});
+    // if(user){
+    //     res.send(user)
+    // }
   } catch (error) {
     res.send(error);
   }

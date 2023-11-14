@@ -8,15 +8,9 @@ function CartPage() {
   const cartState = useSelector((state) => state.cartReducer);
 
   const { cartItems } = cartState;
-  // const cartItems2 = cartState.cartItems
-
-  const toplamFiyat = cartItems.reduce(
-    (toplam, urun) => toplam + urun.fiyatlar,
-    0
-  );
 
   const dispatch = useDispatch();
-
+  const totalPrice = cartItems.reduce((x, urun) => x + urun.fiyatlar, 0);
   return (
     <div>
       <div className="container">
@@ -81,9 +75,9 @@ function CartPage() {
               </div>
             ))}
             <h3 className="text-center text-danger">
-              Toplam Fiyat: {toplamFiyat} ₺
+              Toplam Fiyat: {totalPrice} ₺
             </h3>
-            <Checkout toplamFiyat={toplamFiyat} />
+            <Checkout toplamfiyat={totalPrice} />
           </div>
         )}
       </div>

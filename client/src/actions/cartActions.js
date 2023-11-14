@@ -4,21 +4,22 @@ export const addToCartAction =
       _id: menu._id,
       ad: menu.ad,
       img: menu.img,
-      desc: menu.desc,
       ozellik: ozellik,
+      desc: menu.desc,
       miktar: miktar,
       fiyat: menu.fiyat,
       fiyatlar: menu.fiyat[0][ozellik] * miktar,
     };
-    if (miktar > 0 && miktar <= 10) {
+    if (miktar > 0 && miktar < 11) {
       dispatch({
         type: "ADD_TO_CART",
         payload: cartItem,
       });
+
       const cartItems = getState().cartReducer.cartItems;
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
     } else {
-      alert("Mikatrı doğru giriniz.");
+      alert("Doğru düzgün miktar seç");
     }
   };
 

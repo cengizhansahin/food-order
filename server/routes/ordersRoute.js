@@ -1,21 +1,24 @@
 const express = require("express");
-const cors = require("cors");
-
-const orderModel = require("../models/orderModel");
 const router = express.Router();
 const stripe = require("stripe")(
   "sk_test_51OBIl9BuNN2GghdENruscjbtUNeRy3QpkAZJmbKBOtUXDUpaXoGTMZwUCs2nYAQmHslHGqaCy1JjNCbBVtdY4DwJ00pYyhjdW5"
 );
 const { v4: uuid } = require("uuid");
+const cors = require("cors");
+const orderModel = require("../models/orderModel");
 const app = express();
+
 app.use(cors());
+
 router.post("/checkoutOrder", async (req, res) => {
   const { token, toplamfiyat, currentUser, cartItems } = req.body;
+
   try {
     const customer = await stripe.customers.create({
       email: token.email,
       source: token.id,
     });
+
     const payment = await stripe.paymentIntents.create(
       {
         amount: toplamfiyat * 100,
@@ -27,6 +30,7 @@ router.post("/checkoutOrder", async (req, res) => {
         idempotencyKey: uuid(),
       }
     );
+
     if (payment) {
       const newOrder = new orderModel({
         name: currentUser.name,
@@ -43,10 +47,8 @@ router.post("/checkoutOrder", async (req, res) => {
         transactionId: payment.source_id,
       });
 
-      console.log(newOrder);
-
-      newOrder.save();
-      res.send("Ödeme başarılı.");
+      await newOrder.save();
+      res.send("Ödeme başarılı");
     } else {
       res.send("Bir şeyler ters gitti");
     }
@@ -68,8 +70,9 @@ router.post("/getOrdersByUser", async (req, res) => {
 });
 
 //get all orders
-router.get("getAllOrders", async (req, res) => {
+router.get("/getAllOrders", async (req, res) => {
   const orders = await orderModel.find();
   res.json(orders);
 });
+
 module.exports = router;

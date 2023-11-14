@@ -26,7 +26,7 @@ function Register() {
       password === "" ||
       confirmPassword === ""
     ) {
-      Swal.fire("Eksik alanları doldurunuz.");
+      Swal.fire("Eksik alanları doldurunuz");
     } else {
       const kullanici = {
         name: name,

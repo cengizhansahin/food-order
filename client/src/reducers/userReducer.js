@@ -16,6 +16,7 @@ export const registerUserReducer = (state = {}, action) => {
         success: false,
         error: action.payload,
       };
+
     default:
       return state;
   }
@@ -32,6 +33,7 @@ export const loginUserReducer = (state = {}, action) => {
         loading: false,
         success: true,
         currentUser: action.payload,
+        error: false,
       };
     case "USER_LOGIN_FAILED":
       return {
