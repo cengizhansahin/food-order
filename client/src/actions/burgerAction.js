@@ -6,7 +6,7 @@ export const getAllBurgersAction = () => async (dispatch) => {
     const response = await axios.get(
       "http://localhost:4000/api/burgers/getBurgers"
     );
-    console.log(`response bu: ${response.data}`);
+    // console.log(`response bu: ${response.data}`);
     dispatch({
       type: "GET_BURGERS_SUCCESS",
       payload: response.data,
@@ -30,12 +30,12 @@ export const deleteBurgerAction = (burgerid) => async (dispatch) => {
   }
 };
 
-export const editBurgerAction = (editBurger) => async (dispatch) => {
+export const editBurgerAction = (editedBurger) => async (dispatch) => {
   dispatch({ type: "EDIT_BURGER_REQUEST" });
   try {
     const response = await axios.post(
       "http://localhost:4000/api/burgers/editBurger",
-      { editBurger }
+      { editedBurger }
     );
     dispatch({
       type: "EDIT_BURGER_SUCCESS",
@@ -71,7 +71,7 @@ export const addBurgerAction = (menu) => async (dispatch) => {
 };
 
 export const getBurgerById = (burgerid) => async (dispatch) => {
-  dispatch({ type: "GET_BURGERS_BY_ID_REQUEST" });
+  dispatch({ type: "GET_BURGER_BY_ID_REQUEST" });
 
   try {
     const response = await axios.post(
@@ -79,7 +79,7 @@ export const getBurgerById = (burgerid) => async (dispatch) => {
       { burgerid }
     );
 
-    console.log(response);
+    // console.log(response);
     dispatch({ type: "GET_BURGER_BY_ID_SUCCESS", payload: response.data });
   } catch (error) {
     dispatch({

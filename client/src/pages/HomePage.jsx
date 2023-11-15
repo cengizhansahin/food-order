@@ -8,7 +8,7 @@ function HomePage() {
   const dispatch = useDispatch();
   const burgerState = useSelector((state) => state.getAllBurgersReducer);
   const { burgers, loading } = burgerState;
-  console.log(burgers);
+  // console.log(burgers);
   const navigate = useNavigate();
 
   const userState = useSelector((state) => state.loginUserReducer);
